@@ -44,13 +44,7 @@ const Footer = () => {
 
       {/* Credits and Copyright */}
       <div className="mt-4 text-center text-sm text-gray-500">
-        <p>&copy; {new Date().getFullYear()} שם העסק שלך. כל הזכויות שמורות.</p>
-        <p>
-          נבנה באהבה על ידי{" "}
-          <a className="text-blue-500" href="">
-            אריאל
-          </a>
-        </p>
+        <p>&copy; {new Date().getFullYear()} מאיר לוגסי. כל הזכויות שמורות.</p>
       </div>
     </footer>
   );

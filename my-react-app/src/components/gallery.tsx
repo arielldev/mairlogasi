@@ -4,71 +4,67 @@ import React, { useState } from "react";
 
 // Define the interface for gallery items
 interface GalleryItem {
-  type: "image" | "youtube" | "tiktok"; // Can be image, youtube, or tiktok
-  src: string; // The source URL for the image, video, or embed code
-  alt: string; // Alt text for images (optional for videos and embeds)
-  tiktokUrl?: string; // URL to redirect for TikTok (for redirecting to TikTok platform)
+  type: "image" | "youtube" | "tiktok";
+  src: string;
+  alt: string;
+  tiktokUrl?: string;
 }
 
 const GalleryPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<GalleryItem | null>(null);
-  const [currentIndex, setCurrentIndex] = useState<number>(0); // To track current image index in modal
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const galleryItems: GalleryItem[] = [
-    {
-      type: "image",
-      src: "/mair.jpg",
-      alt: "תמונה 1",
-    },
-    {
-      type: "image",
-      src: "/mair.jpg",
-      alt: "תמונה 2",
-    },
+    { type: "image", src: "/mair.jpg", alt: "תמונה 1" },
+    { type: "image", src: "/mair.jpg", alt: "תמונה 2" },
     {
       type: "youtube",
-      src: "https://www.youtube.com/embed/c0Q0VWiXUAc", // Example YouTube embed URL
+      src: "https://www.youtube.com/embed/c0Q0VWiXUAc",
       alt: "YouTube Video 1",
     },
     {
       type: "tiktok",
-      src: "/tiktok1.png", // Placeholder image for TikTok (or could be an image from TikTok)
+      src: "/tiktok1.png",
       alt: "TikTok Video 1",
-      tiktokUrl: "https://www.tiktok.com/@example/video/7134206015456824577", // Redirect URL to TikTok
+      tiktokUrl: "https://www.tiktok.com/@example/video/7134206015456824577",
     },
     {
       type: "tiktok",
-      src: "/tiktok2.png", // Placeholder image for TikTok (or could be an image from TikTok)
+      src: "/tiktok2.png",
       alt: "TikTok Video 2",
-      tiktokUrl: "https://www.tiktok.com/@example/video/7480573211602028037 ", // Redirect URL to TikTok
+      tiktokUrl: "https://www.tiktok.com/@example/video/7480573211602028037",
     },
-    {
-      type: "image",
-      src: "/mair.jpg",
-      alt: "תמונה 3",
-    },
+    { type: "image", src: "/mair.jpg", alt: "תמונה 3" },
     {
       type: "youtube",
-      src: "https://www.youtube.com/embed/FmJhoWHYlx4", // Example YouTube embed URL
+      src: "https://www.youtube.com/embed/FmJhoWHYlx4",
       alt: "YouTube Video 2",
     },
     {
       type: "youtube",
-      src: "https://www.youtube.com/embed/uIwmZeqrpMk", // Example YouTube embed URL
+      src: "https://www.youtube.com/embed/uIwmZeqrpMk",
       alt: "YouTube Video 3",
     },
     {
       type: "youtube",
-      src: "https://www.youtube.com/embed/hR53FUOw0AI", // Example YouTube embed URL
-      alt: "YouTube Video 3",
+      src: "https://www.youtube.com/embed/hR53FUOw0AI",
+      alt: "YouTube Video 4",
     },
-    // Add more items here
   ];
+
+  // Get only image items for the modal navigation
+  const imageItems = galleryItems.filter((item) => item.type === "image");
 
   const openModal = (content: GalleryItem, index: number) => {
     setModalContent(content);
-    setCurrentIndex(index);
+    // When opening modal, if it's an image, set the image index relative to the imageItems
+    if (content.type === "image") {
+      const imageIndex = imageItems.findIndex((img) => img.src === content.src);
+      setCurrentIndex(imageIndex);
+    } else {
+      setCurrentIndex(index);
+    }
     setIsModalOpen(true);
   };
 
@@ -78,171 +74,152 @@ const GalleryPage = () => {
   };
 
   const handleNextImage = () => {
-    // Only change the image index if the type is "image"
-    const nextIndex =
-      (currentIndex + 1) %
-      galleryItems.filter((item) => item.type === "image").length;
+    const nextIndex = (currentIndex + 1) % imageItems.length;
     setCurrentIndex(nextIndex);
-    setModalContent(
-      galleryItems.filter((item) => item.type === "image")[nextIndex]
-    );
+    setModalContent(imageItems[nextIndex]);
   };
 
   const handlePrevImage = () => {
-    // Only change the image index if the type is "image"
     const prevIndex =
-      (currentIndex -
-        1 +
-        galleryItems.filter((item) => item.type === "image").length) %
-      galleryItems.filter((item) => item.type === "image").length;
+      (currentIndex - 1 + imageItems.length) % imageItems.length;
     setCurrentIndex(prevIndex);
-    setModalContent(
-      galleryItems.filter((item) => item.type === "image")[prevIndex]
-    );
+    setModalContent(imageItems[prevIndex]);
+  };
+
+  // Jump to a specific image from the dots
+  const handleDotClick = (index: number) => {
+    setCurrentIndex(index);
+    setModalContent(imageItems[index]);
   };
 
   return (
-    <div className="gallery-page py-8 mt-12 md:mt-0 " dir="rtl">
-      {/* YouTube Videos Section */}
-      <div className="bg-blue-600 py-12 relative">
-        <h3 className="text-4xl text-center mb-6 text-white font-semibold">
-          סרטוני יוטיוב
-        </h3>
-
-        <div className="gallery-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 mb-8">
-          {galleryItems
-            .filter((item) => item.type === "youtube")
-            .map((item, index) => (
-              <div
-                key={index}
-                className="gallery-item relative cursor-pointer rounded-lg overflow-hidden shadow-2xl hover:scale-105 transform transition-all duration-300"
-                onClick={() => openModal(item, index)}
-              >
+    <div className="gallery-page bg-white py-10 px-4 mt-22 md:mt-10" dir="rtl">
+      {/* Masonry Layout */}
+      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
+        {galleryItems.map((item, index) => (
+          <div
+            key={index}
+            className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 cursor-pointer relative"
+            // Only add onClick for non-TikTok items
+            onClick={() => item.type !== "tiktok" && openModal(item, index)}
+          >
+            {item.type === "youtube" ? (
+              // For YouTube, preserve the 16:9 aspect ratio
+              <div className="w-full relative pb-[56.25%] bg-gray-100">
                 <iframe
                   src={item.src}
                   title={item.alt}
-                  className="w-full h-64 object-cover rounded-lg"
+                  className="absolute top-0 left-0 w-full h-full object-cover"
                   frameBorder="0"
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               </div>
-            ))}
-        </div>
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-          <img
-            src="/waves.svg" // Path to your downloaded SVG
-            alt="wave"
-            className="relative block w-[calc(200%+1.3px)] h-[50px] transform rotate-[180deg]"
-          />
-        </div>
-      </div>
-
-      {/* TikTok Section */}
-      <h3 className="text-2xl text-center font-semibold mb-6 text-blue-500 mt-6">
-        סרטוני טיקטוק מובילים
-      </h3>
-      <div className="gallery-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 mb-8">
-        {galleryItems
-          .filter((item) => item.type === "tiktok")
-          .map((item, index) => (
-            <div
-              key={index}
-              className="gallery-item relative cursor-pointer rounded-lg overflow-hidden shadow-2xl hover:scale-105 transform transition-all duration-300"
-              onClick={() => openModal(item, index)}
-            >
-              <img
-                src={item.src}
-                alt={item.alt}
-                className="w-full object-cover rounded-lg"
-              />
-              <div className="absolute inset-0 bg-black/70 flex justify-center items-center opacity-0 hover:opacity-100 transition-all duration-300">
-                <a
-                  href={item.tiktokUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white text-xl font-semibold"
-                >
-                  צפה בטיקטוק
-                </a>
+            ) : item.type === "tiktok" ? (
+              // TikTok card with group for proper hover effect
+              <div className="w-full relative group">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  className="w-full object-cover"
+                />
+                <div className="absolute inset-0 flex justify-center items-center bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300">
+                  <a
+                    href={item.tiktokUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-2 border border-blue-500 rounded text-white text-lg font-medium hover:bg-blue-500 hover:scale-105 transition duration-300"
+                  >
+                    צפה בטיקטוק
+                  </a>
+                </div>
               </div>
-            </div>
-          ))}
-      </div>
-
-      {/* Images Section */}
-      <h3 className="text-2xl text-center mb-6 mt-6 font-semibold text-blue-500">
-        גלריית תמונות
-      </h3>
-      <div className="gallery-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6">
-        {galleryItems
-          .filter((item) => item.type === "image")
-          .map((item, index) => (
-            <div
-              key={index}
-              className="gallery-item relative cursor-pointer rounded-lg overflow-hidden shadow-2xl hover:scale-105 transform transition-all duration-300"
-              onClick={() => openModal(item, index)}
-            >
+            ) : (
+              // For images, simply display the image
               <img
                 src={item.src}
                 alt={item.alt}
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full object-cover"
               />
-            </div>
-          ))}
+            )}
+          </div>
+        ))}
       </div>
 
-      {/* Modal for Viewing Image or Video */}
+      {/* Modal Overlay */}
       {isModalOpen && modalContent && (
         <div
-          className="fixed inset-0 z-50 flex justify-center items-center bg-black/75"
+          className="fixed inset-0 z-50 flex justify-center items-center bg-black/70 backdrop-blur-sm transition duration-300"
           onClick={closeModal}
         >
           <div
-            className="relative max-w-3xl w-full p-4 bg-white rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()} // Prevent closing the modal when clicking inside
+            className="relative max-w-4xl w-full p-6 bg-white rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
+            {/* Close Button positioned outside the container */}
             <button
               onClick={closeModal}
-              className="absolute top-2 right-2 text-white text-3xl"
+              className="absolute -top-4 -right-4 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 transition duration-200"
             >
               &times;
             </button>
 
-            {/* Modal Content */}
             <div className="modal-body flex justify-center items-center relative">
-              {modalContent?.type === "image" ? (
+              {modalContent.type === "image" ? (
                 <img
                   src={modalContent.src}
                   alt={modalContent.alt}
-                  className="max-w-full max-h-screen rounded-lg"
+                  className="max-w-full max-h-[80vh] rounded-lg object-contain"
                 />
-              ) : modalContent?.type === "youtube" ? (
-                <iframe
-                  src={modalContent.src}
-                  title={modalContent.alt}
-                  className="max-w-full max-h-screen rounded-lg"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+              ) : modalContent.type === "youtube" ? (
+                <div className="w-full relative pb-[56.25%] bg-gray-100">
+                  <iframe
+                    src={modalContent.src}
+                    title={modalContent.alt}
+                    className="absolute top-0 left-0 w-full h-full rounded-lg"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
               ) : null}
-
-              {/* Left and Right Navigation Buttons (For Images Only) */}
-              <button
-                onClick={handlePrevImage}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-4xl"
-              >
-                &#8249; {/* Previous Image (Right Arrow for RTL) */}
-              </button>
-              <button
-                onClick={handleNextImage}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-4xl"
-              >
-                &#8250; {/* Next Image (Left Arrow for RTL) */}
-              </button>
+              {/* Navigation arrows for images */}
+              {modalContent.type === "image" && (
+                <>
+                  <button
+                    onClick={handlePrevImage}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-700 hover:text-gray-900 text-4xl transition duration-300"
+                  >
+                    &#8249;
+                  </button>
+                  <button
+                    onClick={handleNextImage}
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-700 hover:text-gray-900 text-4xl transition duration-300"
+                  >
+                    &#8250;
+                  </button>
+                </>
+              )}
             </div>
+
+            {/* Navigation Dots for Images */}
+            {modalContent.type === "image" && (
+              <div className="mt-4 flex justify-center items-center gap-2">
+                {imageItems.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleDotClick(index)}
+                    className={`w-3 h-3 rounded-full transition 
+                      ${
+                        currentIndex === index ? "bg-blue-500" : "bg-gray-300"
+                      }`}
+                  ></button>
+                ))}
+                <span className="ml-2 text-gray-600 text-sm">
+                  {currentIndex + 1}/{imageItems.length}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       )}
