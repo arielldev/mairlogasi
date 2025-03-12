@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 
 const Hero: React.FC = () => {
   const images = [
-    { src: "/jerusalem1.jpg", alt: "Image 1" },
-    { src: "/jerusalem2.jpg", alt: "Image 2" },
+    { src: "/jerusalem2.jpg", alt: "Image 1" },
+    { src: "/jerusalem.jpg", alt: "Image 2" },
   ];
 
   // For a bidirectional infinite loop, we prepend the last and append the first.
