@@ -13,17 +13,17 @@ const services: Service[] = [
   {
     title: "כותרת 1",
     description: "תיאור קצר על השירותים שמאיר עושה - סתם לדוגמה עין הרע",
-    image: { src: "/mair.jpg", alt: "Image 1" },
+    image: { src: "/book.jpeg", alt: "Image 1" },
   },
   {
     title: "כותרת 2",
     description: "תיאור קצר על השירותים שמאיר עושה - סתם לדוגמה עין הרע",
-    image: { src: "/bannermair.jpeg", alt: "Image 2" },
+    image: { src: "/eye.jpeg", alt: "Image 2" },
   },
   {
     title: "כותרת 3",
     description: "תיאור קצר על השירותים שמאיר עושה - סתם לדוגמה עין הרע",
-    image: { src: "/mair.jpg", alt: "Image 3" },
+    image: { src: "/ring.jpeg", alt: "Image 3" },
   },
 ];
 

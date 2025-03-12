@@ -1,6 +1,6 @@
 import Hero from "../components/hero";
 import FAQ from "../components/faqhome";
-import ProductHome from "../components/productshome";
+import ProductHome from "../components/services";
 import Banner from "../components/bannersection";
 
 const Home = () => {
