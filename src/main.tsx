@@ -5,7 +5,7 @@ import Gallery from "./gallery/page"; // Import the Gallery component
 import Faq from "./faq/page";
 import Home from "./home/page";
 import Layout from "./layout/Layout";
-import "./index.css"; // Ensure Tailwind's directives are imported here
+import "./index.css";
 import About2 from "../about/page";
 import NotFound from "./components/NotFound";
 
