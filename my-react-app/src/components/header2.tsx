@@ -57,17 +57,7 @@ const otherLinks: NavItem[] = [
   { name: "בית", href: "/", icon: Home },
 ];
 
-/*************  ✨ Codeium Command ⭐  *************/
-/**
- * Header component, with a different layout for desktop and mobile.
- * Desktop has a full-bleed header with navigation on the right, and a logo on the left.
- * Mobile has a persistent header with a menu button on the left, and a logo on the right.
- * Mobile menu is a drawer that slides in from the right with a smooth transition.
- * The drawer has a header with a logo and a close button, and a list of links.
- * The links are split into two sections: "המלצות והסמכות" and "אודות", with the second section being reversed for mobile.
- * The drawer also has a footer with an enhanced "צור קשר" button.
- */
-/******  3e0f6ffd-4cd5-45ab-956e-483d3f1f3329  *******/ export default function Header() {
+export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState("");
 
