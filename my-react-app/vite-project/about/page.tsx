@@ -1,4 +1,4 @@
-import Aboiut from "../components/about";
+import Aboiut from "../src/components/about";
 
 const About = () => {
   return <Aboiut />;

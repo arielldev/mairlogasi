@@ -6,7 +6,7 @@ import Faq from "./faq/page";
 import Home from "./home/page";
 import Layout from "./layout/Layout";
 import "./index.css"; // Ensure Tailwind's directives are imported here
-import About2 from "./about/page";
+import About2 from "../about/page";
 import NotFound from "./components/NotFound";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
