@@ -155,7 +155,7 @@ const ContactUsWithWhatsApp: React.FC = () => {
           פנה אלינו דרך WhatsApp לקבלת תשובות מהירות לכל שאלה.
         </p>
         <a
-          href="https://api.whatsapp.com/send?phone=+1234567890" // Replace with your WhatsApp phone number in international format
+          href="https://wa.me/050-76080617"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded transition"
