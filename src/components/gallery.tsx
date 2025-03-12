@@ -20,7 +20,7 @@ const GalleryPage = () => {
     { type: "image", src: "/mair.jpg", alt: "תמונה 2" },
     {
       type: "youtube",
-      src: "https://www.youtube.com/embed/c0Q0VWiXUAc",
+      src: "https://www.youtube.com/embed/c0Q0VWiXUAc?playsinline=1",
       alt: "YouTube Video 1",
     },
     {
@@ -38,17 +38,17 @@ const GalleryPage = () => {
     { type: "image", src: "/mair.jpg", alt: "תמונה 3" },
     {
       type: "youtube",
-      src: "https://www.youtube.com/embed/FmJhoWHYlx4",
+      src: "https://www.youtube.com/embed/FmJhoWHYlx4?playsinline=1",
       alt: "YouTube Video 2",
     },
     {
       type: "youtube",
-      src: "https://www.youtube.com/embed/uIwmZeqrpMk",
+      src: "https://www.youtube.com/embed/uIwmZeqrpMk?playsinline=1",
       alt: "YouTube Video 3",
     },
     {
       type: "youtube",
-      src: "https://www.youtube.com/embed/hR53FUOw0AI",
+      src: "https://www.youtube.com/embed/hR53FUOw0AI?playsinline=1",
       alt: "YouTube Video 4",
     },
   ];
@@ -113,6 +113,7 @@ const GalleryPage = () => {
                   frameBorder="0"
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  {...{ playsinline: "true", "webkit-playsinline": "true" }}
                 />
               </div>
             ) : item.type === "tiktok" ? (
@@ -180,6 +181,7 @@ const GalleryPage = () => {
                     frameBorder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
+                    {...{ playsinline: "true", "webkit-playsinline": "true" }}
                   />
                 </div>
               ) : null}
