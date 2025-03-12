@@ -1,5 +1,5 @@
 // src/layouts/Layout.tsx
-import React, { FC, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 import WhatsAppHeader from "../components/header1";
 import NavigationHeader from "../components/header2";
 import Footer from "../components/footer";

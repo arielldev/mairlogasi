@@ -1,4 +1,3 @@
-import React from "react";
 import GalleryPage from "../components/gallery";
 
 const Gallery = () => {
