@@ -7,6 +7,7 @@ interface GalleryItem {
   type: "image" | "youtube" | "instagram";
   src: string;
   alt: string;
+  instagramUrl?: string;
 }
 
 const GalleryPage = () => {
@@ -23,9 +24,19 @@ const GalleryPage = () => {
       alt: "YouTube Video 1",
     },
     { type: "image", src: "/eye.jpeg", alt: "תמונה 5" },
-    { type: "instagram", src: "/mair.jpg", alt: "Instagram Post 1" },
+    {
+      type: "instagram",
+      src: "/mair.jpg",
+      alt: "Instagram Post 1",
+      instagramUrl: "https://www.instagram.com/example1",
+    },
     { type: "image", src: "/ring.jpeg", alt: "תמונה 6" },
-    { type: "instagram", src: "/mair.jpg", alt: "Instagram Post 2" },
+    {
+      type: "instagram",
+      src: "/mair.jpg",
+      alt: "Instagram Post 2",
+      instagramUrl: "https://www.instagram.com/example2",
+    },
     { type: "image", src: "/baby.jpeg", alt: "תמונה 3" },
     {
       type: "youtube",
@@ -73,7 +84,8 @@ const GalleryPage = () => {
   };
 
   const handlePrevImage = () => {
-    const prevIndex = (currentIndex - 1 + imageItems.length) % imageItems.length;
+    const prevIndex =
+      (currentIndex - 1 + imageItems.length) % imageItems.length;
     setCurrentIndex(prevIndex);
     setModalContent(imageItems[prevIndex]);
   };
@@ -92,11 +104,10 @@ const GalleryPage = () => {
           <div
             key={index}
             className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 cursor-pointer relative"
-            // For all items we open the modal on click (customize as needed)
             onClick={() => openModal(item, index)}
           >
             {item.type === "youtube" ? (
-              // YouTube preserves the 16:9 aspect ratio
+              // For YouTube, preserve the 16:9 aspect ratio
               <div className="w-full relative pb-[56.25%] bg-gray-100">
                 <iframe
                   src={item.src}
@@ -131,14 +142,16 @@ const GalleryPage = () => {
                   alt={item.alt}
                   className="w-full object-cover"
                 />
-                {/* Hover Overlay with "View Post" Button */}
+                {/* Desktop Hover Overlay with "View Post" Button */}
                 <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300">
                   <div className="inline-block p-0.5 rounded-md bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888]">
                     <a
-                      href="#"
+                      href={item.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="block px-5 py-2 rounded-md bg-transparent text-white transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:from-[#f09433] group-hover:via-[#e6683c] group-hover:to-[#bc1888]"
                     >
-                      עבור לפוסט
+                      צפה בפוסט
                     </a>
                   </div>
                 </div>
@@ -158,11 +171,11 @@ const GalleryPage = () => {
       {/* Modal Overlay */}
       {isModalOpen && modalContent && (
         <div
-          className="fixed inset-0 z-50 flex justify-center items-center bg-black/70 backdrop-blur-sm transition duration-300"
+          className="fixed inset-0 z-50 flex justify-center items-center bg-black/70 backdrop-blur-sm transition duration-300 p-4"
           onClick={closeModal}
         >
           <div
-            className="relative max-w-4xl w-full p-6 bg-white rounded-lg shadow-2xl"
+            className="relative w-full max-w-md p-4 bg-white rounded-lg shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -173,7 +186,7 @@ const GalleryPage = () => {
               &times;
             </button>
 
-            <div className="modal-body flex justify-center items-center relative">
+            <div className="modal-body flex flex-col items-center relative">
               {(modalContent.type === "image" ||
                 modalContent.type === "instagram") ? (
                 <img
@@ -190,10 +203,30 @@ const GalleryPage = () => {
                     frameBorder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                    {...{ playsinline: "true", "webkit-playsinline": "true" }}
+                    {...{
+                      playsinline: "true",
+                      "webkit-playsinline": "true",
+                    }}
                   />
                 </div>
               ) : null}
+
+              {/* Instagram-specific button inside the modal */}
+              {modalContent.type === "instagram" &&
+                modalContent.instagramUrl && (
+                  <div className="mt-4">
+                    <a
+                      href={modalContent.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-5 py-2 rounded-md bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white font-bold transition-colors duration-300"
+                    >
+                      צפה בפוסט באינסטגרם
+                    </a>
+                  </div>
+                )}
+
+              {/* Navigation arrows for images */}
               {(modalContent.type === "image" ||
                 modalContent.type === "instagram") && (
                 <>
@@ -213,19 +246,22 @@ const GalleryPage = () => {
               )}
             </div>
 
+            {/* Navigation Dots and Image Count arranged in a group */}
             {(modalContent.type === "image" ||
               modalContent.type === "instagram") && (
-              <div className="mt-4 flex justify-center items-center gap-2">
-                {imageItems.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleDotClick(index)}
-                    className={`w-3 h-3 rounded-full transition ${
-                      currentIndex === index ? "bg-blue-500" : "bg-gray-300"
-                    }`}
-                  ></button>
-                ))}
-                <span className="ml-2 text-gray-600 text-sm">
+              <div className="mt-4 flex flex-col items-center gap-2">
+                <div className="flex flex-row items-center gap-2">
+                  {imageItems.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleDotClick(index)}
+                      className={`w-3 h-3 rounded-full transition ${
+                        currentIndex === index ? "bg-blue-500" : "bg-gray-300"
+                      }`}
+                    ></button>
+                  ))}
+                </div>
+                <span className="text-gray-600 text-sm">
                   {currentIndex + 1}/{imageItems.length}
                 </span>
               </div>
