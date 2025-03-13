@@ -47,7 +47,7 @@ const products: NavItem[] = [
 
 const callsToAction: NavItem[] = [
   { name: "צפה בהדגמה", href: "#", icon: PlayCircle },
-  { name: "צור קשר", href: "https://wa.me/050-76080617", icon: null }, // We'll override the icon for צור קשר
+  { name: "צור קשר", href: "https://wa.link/k03lkr", icon: null }, // We'll override the icon for צור קשר
 ];
 
 const otherLinks: NavItem[] = [
