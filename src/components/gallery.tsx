@@ -92,10 +92,11 @@ const GalleryPage = () => {
           <div
             key={index}
             className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 cursor-pointer relative"
+            // For all items we open the modal on click (customize as needed)
             onClick={() => openModal(item, index)}
           >
             {item.type === "youtube" ? (
-              // For YouTube, preserve the 16:9 aspect ratio
+              // YouTube preserves the 16:9 aspect ratio
               <div className="w-full relative pb-[56.25%] bg-gray-100">
                 <iframe
                   src={item.src}
@@ -108,10 +109,10 @@ const GalleryPage = () => {
                 />
               </div>
             ) : item.type === "instagram" ? (
-              <>
+              <div className="w-full relative group">
                 {/* Instagram Banner */}
                 <div
-                  className="instagram-banner flex items-center justify-center py-1"
+                  className="flex items-center justify-center py-1"
                   style={{
                     background:
                       "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
@@ -130,9 +131,20 @@ const GalleryPage = () => {
                   alt={item.alt}
                   className="w-full object-cover"
                 />
-              </>
+                {/* Hover Overlay with "View Post" Button */}
+                <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300">
+                  <div className="inline-block p-0.5 rounded-md bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888]">
+                    <a
+                      href="#"
+                      className="block px-5 py-2 rounded-md bg-transparent text-white transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:from-[#f09433] group-hover:via-[#e6683c] group-hover:to-[#bc1888]"
+                    >
+                      עבור לפוסט
+                    </a>
+                  </div>
+                </div>
+              </div>
             ) : (
-              // For standard images
+              // Standard images
               <img
                 src={item.src}
                 alt={item.alt}
@@ -182,7 +194,6 @@ const GalleryPage = () => {
                   />
                 </div>
               ) : null}
-              {/* Navigation arrows for images */}
               {(modalContent.type === "image" ||
                 modalContent.type === "instagram") && (
                 <>
@@ -202,7 +213,6 @@ const GalleryPage = () => {
               )}
             </div>
 
-            {/* Navigation Dots for Images */}
             {(modalContent.type === "image" ||
               modalContent.type === "instagram") && (
               <div className="mt-4 flex justify-center items-center gap-2">
