@@ -28,14 +28,14 @@ const GalleryPage = () => {
       type: "instagram",
       src: "/mair.jpg",
       alt: "Instagram Post 1",
-      instagramUrl: "https://www.instagram.com/example1",
+      instagramUrl: "https://www.instagram.com",
     },
     { type: "image", src: "/ring.jpeg", alt: "תמונה 6" },
     {
       type: "instagram",
       src: "/mair.jpg",
       alt: "Instagram Post 2",
-      instagramUrl: "https://www.instagram.com/example2",
+      instagramUrl: "https://www.instagram.com",
     },
     { type: "image", src: "/baby.jpeg", alt: "תמונה 3" },
     {
