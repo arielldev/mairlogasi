@@ -4,10 +4,9 @@ import { useState } from "react";
 
 // Define the interface for gallery items
 interface GalleryItem {
-  type: "image" | "youtube" | "tiktok";
+  type: "image" | "youtube" | "instagram";
   src: string;
   alt: string;
-  tiktokUrl?: string;
 }
 
 const GalleryPage = () => {
@@ -24,20 +23,9 @@ const GalleryPage = () => {
       alt: "YouTube Video 1",
     },
     { type: "image", src: "/eye.jpeg", alt: "תמונה 5" },
-
-    {
-      type: "tiktok",
-      src: "/tiktok1.png",
-      alt: "TikTok Video 1",
-      tiktokUrl: "https://www.tiktok.com/@example/video/7134206015456824577",
-    },
-        { type: "image", src: "/ring.jpeg", alt: "תמונה 6" },
-    {
-      type: "tiktok",
-      src: "/tiktok2.png",
-      alt: "TikTok Video 2",
-      tiktokUrl: "https://www.tiktok.com/@example/video/7480573211602028037",
-    },
+    { type: "instagram", src: "/mair.jpg", alt: "Instagram Post 1" },
+    { type: "image", src: "/ring.jpeg", alt: "תמונה 6" },
+    { type: "instagram", src: "/mair.jpg", alt: "Instagram Post 2" },
     { type: "image", src: "/baby.jpeg", alt: "תמונה 3" },
     {
       type: "youtube",
@@ -57,13 +45,14 @@ const GalleryPage = () => {
     },
   ];
 
-  // Get only image items for the modal navigation
-  const imageItems = galleryItems.filter((item) => item.type === "image");
+  // Include both "image" and "instagram" types for modal navigation
+  const imageItems = galleryItems.filter(
+    (item) => item.type === "image" || item.type === "instagram"
+  );
 
   const openModal = (content: GalleryItem, index: number) => {
     setModalContent(content);
-    // When opening modal, if it's an image, set the image index relative to the imageItems
-    if (content.type === "image") {
+    if (content.type === "image" || content.type === "instagram") {
       const imageIndex = imageItems.findIndex((img) => img.src === content.src);
       setCurrentIndex(imageIndex);
     } else {
@@ -84,8 +73,7 @@ const GalleryPage = () => {
   };
 
   const handlePrevImage = () => {
-    const prevIndex =
-      (currentIndex - 1 + imageItems.length) % imageItems.length;
+    const prevIndex = (currentIndex - 1 + imageItems.length) % imageItems.length;
     setCurrentIndex(prevIndex);
     setModalContent(imageItems[prevIndex]);
   };
@@ -104,8 +92,7 @@ const GalleryPage = () => {
           <div
             key={index}
             className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 cursor-pointer relative"
-            // Only add onClick for non-TikTok items
-            onClick={() => item.type !== "tiktok" && openModal(item, index)}
+            onClick={() => openModal(item, index)}
           >
             {item.type === "youtube" ? (
               // For YouTube, preserve the 16:9 aspect ratio
@@ -120,27 +107,32 @@ const GalleryPage = () => {
                   {...{ playsinline: "true", "webkit-playsinline": "true" }}
                 />
               </div>
-            ) : item.type === "tiktok" ? (
-              // TikTok card with group for proper hover effect
-              <div className="w-full relative group">
+            ) : item.type === "instagram" ? (
+              <>
+                {/* Instagram Banner */}
+                <div
+                  className="instagram-banner flex items-center justify-center py-1"
+                  style={{
+                    background:
+                      "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
+                  }}
+                >
+                  <img
+                    src="/Instagram_icon.png"
+                    alt="Instagram logo"
+                    className="w-5 h-5 ml-2"
+                  />
+                  <span className="text-white font-bold">Instagram</span>
+                </div>
+                {/* Instagram Image */}
                 <img
                   src={item.src}
                   alt={item.alt}
                   className="w-full object-cover"
                 />
-                <div className="absolute inset-0 flex justify-center items-center bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300">
-                  <a
-                    href={item.tiktokUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-5 py-2 border border-blue-500 rounded text-white text-lg font-medium hover:bg-blue-500 hover:scale-105 transition duration-300"
-                  >
-                    צפה בטיקטוק
-                  </a>
-                </div>
-              </div>
+              </>
             ) : (
-              // For images, simply display the image
+              // For standard images
               <img
                 src={item.src}
                 alt={item.alt}
@@ -161,7 +153,7 @@ const GalleryPage = () => {
             className="relative max-w-4xl w-full p-6 bg-white rounded-lg shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button positioned outside the container */}
+            {/* Close Button */}
             <button
               onClick={closeModal}
               className="absolute -top-4 -right-4 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 transition duration-200"
@@ -170,7 +162,8 @@ const GalleryPage = () => {
             </button>
 
             <div className="modal-body flex justify-center items-center relative">
-              {modalContent.type === "image" ? (
+              {(modalContent.type === "image" ||
+                modalContent.type === "instagram") ? (
                 <img
                   src={modalContent.src}
                   alt={modalContent.alt}
@@ -190,7 +183,8 @@ const GalleryPage = () => {
                 </div>
               ) : null}
               {/* Navigation arrows for images */}
-              {modalContent.type === "image" && (
+              {(modalContent.type === "image" ||
+                modalContent.type === "instagram") && (
                 <>
                   <button
                     onClick={handlePrevImage}
@@ -209,16 +203,16 @@ const GalleryPage = () => {
             </div>
 
             {/* Navigation Dots for Images */}
-            {modalContent.type === "image" && (
+            {(modalContent.type === "image" ||
+              modalContent.type === "instagram") && (
               <div className="mt-4 flex justify-center items-center gap-2">
                 {imageItems.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => handleDotClick(index)}
-                    className={`w-3 h-3 rounded-full transition 
-                      ${
-                        currentIndex === index ? "bg-blue-500" : "bg-gray-300"
-                      }`}
+                    className={`w-3 h-3 rounded-full transition ${
+                      currentIndex === index ? "bg-blue-500" : "bg-gray-300"
+                    }`}
                   ></button>
                 ))}
                 <span className="ml-2 text-gray-600 text-sm">
