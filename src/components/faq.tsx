@@ -76,7 +76,7 @@ export default function FAQPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               {faq.question}
             </h2>
-            <hr className="border-t border-gray-300 mb-6" />
+            <hr className="border-t border-blue-300 mb-6" />
             {/* Answer area: Two-column layout with image on left and text on right */}
             <div className="flex flex-col sm:flex-row items-start">
               {/* Image Column */}
@@ -95,7 +95,7 @@ export default function FAQPage() {
               </div>
             </div>
             {index < faqData.length - 1 && (
-              <hr className="border-t border-gray-300 my-10" />
+              <hr className="border-t border-blue-300 my-10" />
             )}
           </div>
         ))}

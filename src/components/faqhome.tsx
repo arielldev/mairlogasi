@@ -20,7 +20,7 @@ export default function SingleFaq() {
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
             {faqItem.question}
           </h2>
-          <hr className="border-t border-gray-300 mx-auto w-1/2 mb-6" />
+          <hr className="border-t border-blue-300 mx-auto w-1/2 mb-6" />
           {/* Answer Section */}
           <div className="flex flex-col sm:flex-row items-center">
             {/* Image Column */}

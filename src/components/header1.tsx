@@ -1,7 +1,7 @@
 export default function WhatsAppBanner() {
   return (
     <div
-      className="bg-gradient-to-r from-green-500 to-green-600 to-green-700 text-white"
+      className="bg-gradient-to-r from-blue-500 to-blue-600 to-blue-700 text-white"
       dir="rtl"
     >
       <a
@@ -20,7 +20,7 @@ export default function WhatsAppBanner() {
             />
           </div>
           {/* Right side in RTL (appears on the left) – clickable phone number */}
-          <span className="bg-white text-green-700 font-bold px-3 py-1 rounded shadow hover:bg-green-100 transition-colors mt-2">
+          <span className="bg-white text-blue-700 font-bold px-3 py-1 rounded shadow hover:bg-blue-100 transition-colors mt-2">
             <div className=" sm:mt-0">050-7608061</div>
           </span>
         </div>

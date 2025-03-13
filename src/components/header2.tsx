@@ -27,27 +27,27 @@ const products: NavItem[] = [
   {
     name: "הסמכות רב",
     description: "הסמכות שמצביעות על הידע והניסיון המקצועי שלי",
-    href: "#",
+    href: "/recommendations/graduations",
     icon: Award,
   },
   {
     name: "המלצות",
     description:
       "המלצות מלקוחות ושותפים עסקיים, שמעידות על איכות העבודה והשירות",
-    href: "#",
+    href: "/recommendations/customers",
     icon: UserCheck,
   },
   {
     name: "כתבות",
     description: "כתבות שפורסמו עלי שמציגות את ההתמחות והידע שלי בתעשייה",
-    href: "#",
+    href: "/recommendations/articles",
     icon: FileText,
   },
 ];
 
 const callsToAction: NavItem[] = [
   { name: "צפה בהדגמה", href: "#", icon: PlayCircle },
-  { name: "צור קשר", href: "#", icon: null }, // We'll override the icon for צור קשר
+  { name: "צור קשר", href: "https://wa.me/050-76080617", icon: null }, // We'll override the icon for צור קשר
 ];
 
 const otherLinks: NavItem[] = [
@@ -119,15 +119,16 @@ export default function Header() {
                       <div className="flex-auto text-right">
                         <a
                           href={item.href}
-                          className="block font-semibold text-gray-900"
+                          className="block "
                         >
-                          {item.name}
-                        </a>
+                          <span className=" text-gray-900 font">{item.name}</span>
+                      
                         {item.description && (
                           <p className="mt-1 text-gray-600">
                             {item.description}
                           </p>
                         )}
+                          </a>
                       </div>
                     </div>
                   ))}

@@ -17,25 +17,28 @@ const GalleryPage = () => {
 
   const galleryItems: GalleryItem[] = [
     { type: "image", src: "/mair.jpg", alt: "תמונה 1" },
-    { type: "image", src: "/mair.jpg", alt: "תמונה 2" },
+    { type: "image", src: "/mair2.jpeg", alt: "תמונה 2" },
     {
       type: "youtube",
       src: "https://www.youtube.com/embed/c0Q0VWiXUAc?playsinline=1",
       alt: "YouTube Video 1",
     },
+    { type: "image", src: "/eye.jpeg", alt: "תמונה 5" },
+
     {
       type: "tiktok",
       src: "/tiktok1.png",
       alt: "TikTok Video 1",
       tiktokUrl: "https://www.tiktok.com/@example/video/7134206015456824577",
     },
+        { type: "image", src: "/ring.jpeg", alt: "תמונה 6" },
     {
       type: "tiktok",
       src: "/tiktok2.png",
       alt: "TikTok Video 2",
       tiktokUrl: "https://www.tiktok.com/@example/video/7480573211602028037",
     },
-    { type: "image", src: "/mair.jpg", alt: "תמונה 3" },
+    { type: "image", src: "/baby.jpeg", alt: "תמונה 3" },
     {
       type: "youtube",
       src: "https://www.youtube.com/embed/FmJhoWHYlx4?playsinline=1",
@@ -46,6 +49,7 @@ const GalleryPage = () => {
       src: "https://www.youtube.com/embed/uIwmZeqrpMk?playsinline=1",
       alt: "YouTube Video 3",
     },
+    { type: "image", src: "/bookpaper.jpeg", alt: "תמונה 4" },
     {
       type: "youtube",
       src: "https://www.youtube.com/embed/hR53FUOw0AI?playsinline=1",

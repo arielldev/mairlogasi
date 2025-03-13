@@ -111,7 +111,7 @@ const ContactUsWithWhatsApp: React.FC = () => {
           {status && (
             <div
               className={`mb-4 text-center text-sm font-semibold ${
-                status.error ? "text-red-600" : "text-green-600"
+                status.error ? "text-red-600" : "text-blue-600"
               }`}
             >
               {status.message}
@@ -139,7 +139,7 @@ const ContactUsWithWhatsApp: React.FC = () => {
         style={{
           clipPath: isMobile
             ? "none"
-            : "polygon(10% 0, 100% 0, 100% 100%, 0 100%)",
+            : "none",
         }}
       >
         <div className="mb-4">
@@ -158,7 +158,7 @@ const ContactUsWithWhatsApp: React.FC = () => {
           href="https://wa.me/050-76080617"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded transition"
+          className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded transition"
         >
           פתח WhatsApp
         </a>

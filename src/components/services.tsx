@@ -58,7 +58,7 @@ const ServicesSection: React.FC = () => {
           return (
             <article
               key={index}
-              className="w-full border-b border-gray-200 py-12"
+              className="w-full border-b border-blue-300 py-12"
             >
               <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-stretch">
                 <div className={`flex ${isOdd ? "order-2" : "order-1"} h-96`}>
