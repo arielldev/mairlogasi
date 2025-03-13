@@ -155,7 +155,7 @@ const ContactUsWithWhatsApp: React.FC = () => {
           פנה אלינו דרך WhatsApp לקבלת תשובות מהירות לכל שאלה.
         </p>
         <a
-          href="https://wa.me/050-76080617"
+          href="https://wa.me/972507608061"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded transition"

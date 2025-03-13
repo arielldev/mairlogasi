@@ -5,7 +5,7 @@ export default function WhatsAppBanner() {
       dir="rtl"
     >
       <a
-        href="https://wa.me/050-76080617"
+        href="https://wa.me/972507608061"
         target="_blank"
         rel="noopener noreferrer"
       >
