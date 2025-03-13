@@ -47,7 +47,7 @@ const products: NavItem[] = [
 
 const callsToAction: NavItem[] = [
   { name: "צפה בהדגמה", href: "#", icon: PlayCircle },
-  { name: "צור קשר", href: "https://wa.link/k03lkr", icon: null }, // We'll override the icon for צור קשר
+  { name: "צור קשר", href: "https://wa.me/972507608061", icon: null }, // We'll override the icon for צור קשר
 ];
 
 const otherLinks: NavItem[] = [
@@ -321,7 +321,7 @@ export default function Header() {
                 {/* Drawer Footer */}
                 <div className="p-4 border-t border-gray-200">
                   <a
-                    href="#"
+                    href="https://wa.me/972507608061"
                     className="flex w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 px-4 py-3 text-base font-semibold text-white"
                   >
                     <img

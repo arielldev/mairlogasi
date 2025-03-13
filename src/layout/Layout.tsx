@@ -19,7 +19,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       </div>
 
       {/* Main content with top padding to account for header heights */}
-      <main className="pt-[calc(5vh+64px)]">{children}</main>
+      <main className="pt-[calc(5vh+64px)] overflow-hidden">{children}</main>
       <ContactUsWithWhatsApp />
 
       <Footer />

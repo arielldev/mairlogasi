@@ -6,3 +6,25 @@
   font-family: "Open Sans", sans-serif;
 
 }
+
+/* For WebKit browsers (Chrome, Edge, Safari) */
+/* For WebKit browsers */
+::-webkit-scrollbar {
+  width: 12px; /* Adjust scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+  background: #fff; /* White track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #007BFF; /* Blue thumb */
+  border-radius: 6px; /* Rounded corners */
+  border: 3px solid #fff; /* White border around thumb */
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: thin; /* Options: auto, thin */
+  scrollbar-color: #007BFF #fff; /* thumb color, track color */
+}

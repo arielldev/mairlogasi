@@ -108,10 +108,27 @@ const Hero: React.FC = () => {
         ))}
       </div>
 
+      {/* Static Text Overlay */}
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+        <div
+          className="text-center text-white p-4 rounded w-full"
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)",
+          }}
+        >
+          <h1 className="text-4xl font-bold">הרב מאיר לוגסי
+          </h1>
+          <p className="mt-4 text-xl ">
+          מומחה בהסרת עין הרע, חסימות וכישוף
+          </p>
+        </div>
+      </div>
+
       {/* Navigation Buttons (only visible on desktop) */}
       <button
         onClick={prevSlide}
-        className="hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 rounded-full p-3 shadow-xl transition-all duration-300"
+        className="hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 rounded-full p-3 shadow-xl transition-all duration-300 z-20"
       >
         <svg
           className="w-6 h-6"
@@ -129,7 +146,7 @@ const Hero: React.FC = () => {
       </button>
       <button
         onClick={nextSlide}
-        className="hidden md:block absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 rounded-full p-3 shadow-xl transition-all duration-300"
+        className="hidden md:block absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 rounded-full p-3 shadow-xl transition-all duration-300 z-20"
       >
         <svg
           className="w-6 h-6"
@@ -147,7 +164,7 @@ const Hero: React.FC = () => {
       </button>
 
       {/* Dot Navigation */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
         {images.map((_, index) => {
           // Real slides are at indices 1 to images.length.
           const isActive = currentIndex === index + 1;
