@@ -129,7 +129,7 @@ const ReviewsSection: React.FC = () => {
   };
 
   return (
-    <section className="py-16 px-4" dir="rtl">
+    <section className="py-16 px-4 mt-10" dir="rtl">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.map((review, index) => (
