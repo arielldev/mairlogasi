@@ -1,13 +1,22 @@
 "use client";
 
+import { X } from "lucide-react";
 import { useState } from "react";
 
-// Define the interface for gallery items
+// Define the interface for gallery items. The description field is now optional.
 interface GalleryItem {
-  type: "image" | "youtube" | "instagram";
+  type: "image" | "youtube" | "instagram" | "video";
   src: string;
   alt: string;
+  category: string;
+  description?: string;
   instagramUrl?: string;
+}
+
+interface GallerySection {
+  title: string;
+  bannerStyle: React.CSSProperties;
+  items: GalleryItem[];
 }
 
 const GalleryPage = () => {
@@ -15,48 +24,191 @@ const GalleryPage = () => {
   const [modalContent, setModalContent] = useState<GalleryItem | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
+  // Banner gradients.
+  const neutralBanner = {
+    background: "linear-gradient(45deg, #3B82F6, #2563EB, #1D4ED8)",
+  };
+  const youtubeBanner = {
+    background: "linear-gradient(45deg, #FF0000, #c4302b)",
+  };
+  const instagramBanner = {
+    background:
+      "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
+  };
+  const goldenBanner = {
+    background: "linear-gradient(45deg, #DAA520, #FFD700, #FFC107)",
+  };
+
+  // Sample gallery items.
   const galleryItems: GalleryItem[] = [
-    { type: "image", src: "/mair.jpg", alt: "תמונה 1" },
-    { type: "image", src: "/mair2.jpeg", alt: "תמונה 2" },
+    // These items are manually assigned to "עוד".
+    {
+      type: "image",
+      src: "/mair.jpg",
+      alt: "תמונה 1",
+      category: "עוד",
+      description: "",
+    },
+    {
+      type: "image",
+      src: "/mair2.jpeg",
+      alt: "תמונה 2",
+      category: "עוד",
+      description: "",
+    },
+    {
+      type: "image",
+      src: "/eye.jpeg",
+      alt: "תמונה 5",
+      category: "עוד",
+      description: "",
+    },
+    {
+      type: "image",
+      src: "/ring.jpeg",
+      alt: "תמונה 6",
+      category: "עוד",
+      description: "",
+    },
+    {
+      type: "image",
+      src: "/baby.jpeg",
+      alt: "תמונה 3",
+      category: "עוד",
+      description: "",
+    },
+    {
+      type: "image",
+      src: "/bookpaper.jpeg",
+      alt: "תמונה 4",
+      category: "עוד",
+      description: "",
+    },
+
+    {
+      type: "video",
+      src: "/sample-video.mp4",
+      alt: "וידאו MP4",
+      category: "החזרת אהבה והפרדה",
+      description: "",
+    },
+    {
+      type: "video",
+      src: "/sample-video.mp4",
+      alt: "וידאו MP4",
+      category: "תמונות של אבחון בעופרת",
+      description: "",
+    },
+    {
+      type: "video",
+      src: "/sample-video.mp4",
+      alt: "וידאו MP4",
+      category: "תמונות של ערכות שרפה לביטול כישוף וחסימות קשות",
+      description: "",
+    },
+    {
+      type: "video",
+      src: "/sample-video.mp4",
+      alt: "וידאו MP4",
+      category: "עדויות של לקוחות",
+      description: "",
+    },
+
+    // YouTube items remain in the YouTube section.
     {
       type: "youtube",
       src: "https://www.youtube.com/embed/c0Q0VWiXUAc?playsinline=1",
       alt: "YouTube Video 1",
+      category: "YouTube",
+      description: "",
     },
-    { type: "image", src: "/eye.jpeg", alt: "תמונה 5" },
-    {
-      type: "instagram",
-      src: "/mair.jpg",
-      alt: "Instagram Post 1",
-      instagramUrl: "https://www.instagram.com",
-    },
-    { type: "image", src: "/ring.jpeg", alt: "תמונה 6" },
-    {
-      type: "instagram",
-      src: "/mair.jpg",
-      alt: "Instagram Post 2",
-      instagramUrl: "https://www.instagram.com",
-    },
-    { type: "image", src: "/baby.jpeg", alt: "תמונה 3" },
     {
       type: "youtube",
       src: "https://www.youtube.com/embed/FmJhoWHYlx4?playsinline=1",
       alt: "YouTube Video 2",
+      category: "YouTube",
+      description: "",
     },
     {
       type: "youtube",
       src: "https://www.youtube.com/embed/uIwmZeqrpMk?playsinline=1",
       alt: "YouTube Video 3",
+      category: "YouTube",
+      description: "",
     },
-    { type: "image", src: "/bookpaper.jpeg", alt: "תמונה 4" },
     {
       type: "youtube",
       src: "https://www.youtube.com/embed/hR53FUOw0AI?playsinline=1",
       alt: "YouTube Video 4",
+      category: "YouTube",
+      description: "",
+    },
+    // Instagram items retain a description.
+    {
+      type: "instagram",
+      src: "/mair.jpg",
+      alt: "Instagram Post 1",
+      category: "Instagram",
+      description: "תיאור - פוסט אינסטגרם",
+      instagramUrl: "https://www.instagram.com",
+    },
+    {
+      type: "instagram",
+      src: "/mair.jpg",
+      alt: "Instagram Post 2",
+      category: "Instagram",
+      description: "תיאור - פוסט אינסטגרם",
+      instagramUrl: "https://www.instagram.com",
     },
   ];
 
-  // Include both "image" and "instagram" types for modal navigation
+  // Define section order.
+  const sectionOrder = [
+    "החזרת אהבה והפרדה",
+    "תמונות של אבחון בעופרת",
+    "תמונות של ערכות שרפה לביטול כישוף וחסימות קשות",
+    "עדויות של לקוחות",
+    "YouTube",
+    "Instagram",
+    "עוד",
+  ];
+
+  // Define sections with manual configuration.
+  const sectionsConfig: {
+    [key: string]: { title: string; bannerStyle: React.CSSProperties };
+  } = {
+    "החזרת אהבה והפרדה": {
+      title: "החזרת אהבה והפרדה",
+      bannerStyle: neutralBanner,
+    },
+    "תמונות של אבחון בעופרת": {
+      title: "תמונות של אבחון בעופרת",
+      bannerStyle: neutralBanner,
+    },
+    "תמונות של ערכות שרפה לביטול כישוף וחסימות קשות": {
+      title: "תמונות של ערכות שרפה לביטול כישוף וחסימות קשות",
+      bannerStyle: neutralBanner,
+    },
+    "עדויות של לקוחות": {
+      title: "עדויות של לקוחות",
+      bannerStyle: neutralBanner,
+    },
+    YouTube: { title: "YouTube", bannerStyle: youtubeBanner },
+    Instagram: { title: "Instagram", bannerStyle: instagramBanner },
+    עוד: { title: "עוד", bannerStyle: goldenBanner },
+  };
+
+  // Group items into sections based solely on the item's category.
+  const gallerySections: GallerySection[] = sectionOrder.map((key) => {
+    const items = galleryItems.filter((item) => item.category === key);
+    return {
+      title: sectionsConfig[key].title,
+      bannerStyle: sectionsConfig[key].bannerStyle,
+      items,
+    };
+  });
+
+  // For modal navigation, include only image and instagram items.
   const imageItems = galleryItems.filter(
     (item) => item.type === "image" || item.type === "instagram"
   );
@@ -90,7 +242,6 @@ const GalleryPage = () => {
     setModalContent(imageItems[prevIndex]);
   };
 
-  // Jump to a specific image from the dots
   const handleDotClick = (index: number) => {
     setCurrentIndex(index);
     setModalContent(imageItems[index]);
@@ -98,77 +249,92 @@ const GalleryPage = () => {
 
   return (
     <div className="gallery-page bg-white py-10 px-4 mt-22 md:mt-10" dir="rtl">
-      {/* Masonry Layout */}
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
-        {galleryItems.map((item, index) => (
+      {gallerySections.map((section, sectionIndex) => (
+        <div key={sectionIndex} className="mb-10">
+          {/* Section Banner with Pattern */}
           <div
-            key={index}
-            className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 cursor-pointer relative"
-            onClick={() => openModal(item, index)}
+            className="mx-auto flex items-center justify-center py-4 px-6 rounded-t-lg text-white font-semibold text-xl"
+            style={{
+              maxWidth: "90%",
+              height: "80px",
+              // Use the section's gradient and add a subtle repeating pattern overlay.
+              backgroundImage: `${
+                section.bannerStyle.background ||
+                "linear-gradient(45deg, #3B82F6, #2563EB, #1D4ED8)"
+              }, repeating-linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.1) 10px, transparent 10px, transparent 20px)`,
+              backgroundBlendMode: "overlay",
+              backgroundSize: "cover",
+            }}
           >
-            {item.type === "youtube" ? (
-              // For YouTube, preserve the 16:9 aspect ratio
-              <div className="w-full relative pb-[56.25%] bg-gray-100">
-                <iframe
-                  src={item.src}
-                  title={item.alt}
-                  className="absolute top-0 left-0 w-full h-full object-cover"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  {...{ playsinline: "true", "webkit-playsinline": "true" }}
-                />
-              </div>
-            ) : item.type === "instagram" ? (
-              <div className="w-full relative group">
-                {/* Instagram Banner */}
-                <div
-                  className="flex items-center justify-center py-1"
-                  style={{
-                    background:
-                      "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
-                  }}
-                >
-                  <img
-                    src="/Instagram_icon.png"
-                    alt="Instagram logo"
-                    className="w-5 h-5 ml-2"
-                  />
-                  <span className="text-white font-bold">Instagram</span>
-                </div>
-                {/* Instagram Image */}
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="w-full object-cover"
-                />
-                {/* Desktop Hover Overlay with "View Post" Button */}
-                <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300">
-                  <div className="inline-block p-0.5 rounded-md bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888]">
-                    <a
-                      href={item.instagramUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block px-5 py-2 rounded-md bg-transparent text-white transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:from-[#f09433] group-hover:via-[#e6683c] group-hover:to-[#bc1888]"
-                    >
-                      צפה בפוסט
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              // Standard images
-              <img
-                src={item.src}
-                alt={item.alt}
-                className="w-full object-cover"
-              />
-            )}
+            {section.title}
           </div>
-        ))}
-      </div>
+          {/* Masonry Layout for Section Items */}
+          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 bg-white rounded-b-lg p-4 shadow">
+            {section.items.map((item, index) => (
+              <div
+                key={index}
+                className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 cursor-pointer relative"
+                onClick={() => openModal(item, index)}
+              >
+                {item.type === "youtube" ? (
+                  <div className="w-full relative pb-[56.25%] bg-gray-100">
+                    <iframe
+                      src={item.src}
+                      title={item.alt}
+                      className="absolute top-0 left-0 w-full h-full object-cover"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      {...{ playsinline: "true", "webkit-playsinline": "true" }}
+                    />
+                  </div>
+                ) : item.type === "instagram" ? (
+                  <div className="w-full relative group">
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="w-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300">
+                      <div className="inline-block p-0.5 rounded-md bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888]">
+                        <a
+                          href={item.instagramUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block px-5 py-2 rounded-md bg-transparent text-white transition-colors duration-300"
+                        >
+                          צפה בפוסט
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ) : item.type === "video" ? (
+                  <div className="w-full relative bg-gray-100">
+                    <video
+                      src={item.src}
+                      controls
+                      className="w-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="w-full object-cover"
+                  />
+                )}
+                {/* Render description only if it exists */}
+                {item.description && (
+                  <div className="p-2 bg-gray-50">
+                    <p className="text-sm text-gray-700">{item.description}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
 
-      {/* Modal Overlay */}
       {isModalOpen && modalContent && (
         <div
           className="fixed inset-0 z-50 flex justify-center items-center bg-black/70 backdrop-blur-sm transition duration-300 p-4"
@@ -178,17 +344,16 @@ const GalleryPage = () => {
             className="relative w-full max-w-md p-4 bg-white rounded-lg shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <button
               onClick={closeModal}
               className="absolute -top-4 -right-4 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 transition duration-200"
             >
-              &times;
+              <X className="w-6 h-6" />
             </button>
 
             <div className="modal-body flex flex-col items-center relative">
-              {(modalContent.type === "image" ||
-                modalContent.type === "instagram") ? (
+              {modalContent.type === "image" ||
+              modalContent.type === "instagram" ? (
                 <img
                   src={modalContent.src}
                   alt={modalContent.alt}
@@ -203,15 +368,17 @@ const GalleryPage = () => {
                     frameBorder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                    {...{
-                      playsinline: "true",
-                      "webkit-playsinline": "true",
-                    }}
+                    {...{ playsinline: "true", "webkit-playsinline": "true" }}
                   />
                 </div>
+              ) : modalContent.type === "video" ? (
+                <video
+                  src={modalContent.src}
+                  controls
+                  className="max-w-full max-h-[80vh] rounded-lg object-contain"
+                />
               ) : null}
 
-              {/* Instagram-specific button inside the modal */}
               {modalContent.type === "instagram" &&
                 modalContent.instagramUrl && (
                   <div className="mt-4">
@@ -219,26 +386,25 @@ const GalleryPage = () => {
                       href={modalContent.instagramUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block px-5 py-2 rounded-md bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white font-bold transition-colors duration-300"
+                      className="inline-block px-5 py-2 rounded-md bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white font-semibold text-xl transition-colors duration-300"
                     >
                       צפה בפוסט באינסטגרם
                     </a>
                   </div>
                 )}
 
-              {/* Navigation arrows for images */}
               {(modalContent.type === "image" ||
                 modalContent.type === "instagram") && (
                 <>
                   <button
                     onClick={handlePrevImage}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-700 hover:text-gray-900 text-4xl transition duration-300"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-700 hover:text-gray-900 text-4xl transition duration-300 cursor-pointer"
                   >
                     &#8249;
                   </button>
                   <button
                     onClick={handleNextImage}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-700 hover:text-gray-900 text-4xl transition duration-300"
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-700 hover:text-gray-900 text-4xl transition duration-300 cursor-pointer"
                   >
                     &#8250;
                   </button>
@@ -246,7 +412,6 @@ const GalleryPage = () => {
               )}
             </div>
 
-            {/* Navigation Dots and Image Count arranged in a group */}
             {(modalContent.type === "image" ||
               modalContent.type === "instagram") && (
               <div className="mt-4 flex flex-col items-center gap-2">
