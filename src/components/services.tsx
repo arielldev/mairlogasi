@@ -12,21 +12,35 @@ interface Service {
 
 const services: Service[] = [
   {
-    title: "כותרת 1",
-    description: "תיאור קצר על השירותים שמאיר עושה - סתם לדוגמה עין הרע",
+    title: "קמע הגנה נגד עין הרע פתיחת מזל בפרנסה וזווג",
+    description:
+      "קמע להגנה מעין הרע ופתיחת מזל בפרנסה וזווג כסף טהור!!, טליון 650 כולל שרשרת 700",
     image: { src: "/book.jpeg", alt: "Image 1" },
-    price: "100₪",
+    price: "650₪",
   },
   {
-    title: "כותרת 2",
-    description: "תיאור קצר על השירותים שמאיר עושה - סתם לדוגמה עין הרע",
+    title: "מזוזה מהודרת",
+    description: "הרב סופר סת''ם כותב מזוזות קמעות וספר תורה",
     image: { src: "/eye.jpeg", alt: "Image 2" },
-    price: "120₪",
+    price: "400₪",
   },
   {
-    title: "כותרת 3",
-    description: "תיאור קצר על השירותים שמאיר עושה - סתם לדוגמה עין הרע",
+    title: "קמע לחן וחסד לפתיחת מזל בפרנסה וזווג",
+    description:
+      "  קלף מזוזה עם כתיבה בנוצה שהרב מכין במיוחד עם כוונות לאותו אדם  סגולה להגנה, להצלחה ופתיחת מזל🙏 ",
     image: { src: "/ring.jpeg", alt: "Image 3" },
+    price: "300₪",
+  },
+  {
+    title: "הוצאת כישוף ועין הרע בטלפון",
+    description: "באמצעות עופרת",
+    image: { src: "/eye.jpeg", alt: "Image 4" },
+    price: "150₪",
+  },
+  {
+    title: "הוצאת עין הרע בטלפון",
+    description: "",
+    image: { src: "/eye.jpeg", alt: "Image 4" },
     price: "150₪",
   },
 ];
@@ -52,7 +66,7 @@ const ServicesSection: React.FC = () => {
               <div className="text-center p-4">
                 <h2 className="text-2xl font-semibold">{service.title}</h2>
                 <p className="text-xl text-gray-700">{service.description}</p>
-                <p className="text-sm text-green-500 font-bold mt-2">
+                <p className="text-lg text-green-500 font-bold mt-2">
                   {service.price}
                 </p>
               </div>
@@ -89,7 +103,7 @@ const ServicesSection: React.FC = () => {
                   <p className="text-xl text-gray-700 leading-relaxed">
                     {service.description}
                   </p>
-                  <p className="text-sm text-green-500 font-bold mt-2">
+                  <p className="text-lg text-green-500 font-bold mt-2">
                     {service.price}
                   </p>
                 </div>
