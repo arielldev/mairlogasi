@@ -75,29 +75,39 @@ function FAQItem({ faq, isLast }: FAQItemProps) {
     <div className="mb-8">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left focus:outline-none flex items-center justify-between py-4 px-2 hover:bg-gray-100 transition-colors"
+        className="w-full focus:outline-none py-4 px-2 hover:bg-gray-100 transition-colors"
         aria-expanded={isOpen}
         aria-controls={`faq-${faq.question.replace(/\s+/g, "")}`}
       >
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
-          {faq.question}
-        </h2>
-        <svg
-          className={`w-6 h-6 transform transition-transform duration-300 ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
+        {/* The container is forced into LTR so that the icon appears on the left.
+            The question text is then set to RTL and right-aligned. */}
+        <div
+          className="flex items-center justify-between"
+          style={{ direction: "ltr" }}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+          <svg
+            className={`w-6 h-6 transform transition-transform duration-300 ${
+              isOpen ? "rotate-180" : "rotate-0"
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+          <h2
+            className="flex-1 text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 text-right"
+            dir="rtl"
+          >
+            {faq.question}
+          </h2>
+        </div>
       </button>
       <div
         id={`faq-${faq.question.replace(/\s+/g, "")}`}
@@ -119,7 +129,7 @@ function FAQItem({ faq, isLast }: FAQItemProps) {
 
 export default function FAQPage() {
   return (
-    <div className="bg-white py-12 mt-10" dir="rtl">
+    <div className="bg-white py-12 mt-22 md:mt-10" dir="rtl">
       <div className="max-w-4xl mx-auto px-4">
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 text-center mb-8">
           שאלות נפוצות
