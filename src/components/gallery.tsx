@@ -28,9 +28,6 @@ const GalleryPage = () => {
   const neutralBanner = {
     background: "linear-gradient(45deg, #3B82F6, #2563EB, #1D4ED8)",
   };
-  const youtubeBanner = {
-    background: "linear-gradient(45deg, #FF0000, #c4302b)",
-  };
   const instagramBanner = {
     background:
       "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
@@ -41,7 +38,7 @@ const GalleryPage = () => {
 
   // Sample gallery items.
   const galleryItems: GalleryItem[] = [
-    // These items are manually assigned to "עוד".
+    // Items for the "עוד" category.
     {
       type: "image",
       src: "/mair.jpg",
@@ -84,7 +81,35 @@ const GalleryPage = () => {
       category: "עוד",
       description: "",
     },
-
+    // Moved YouTube items now to the "עוד" category.
+    {
+      type: "youtube",
+      src: "https://www.youtube.com/embed/c0Q0VWiXUAc?playsinline=1",
+      alt: "YouTube Video 1",
+      category: "עוד",
+      description: "",
+    },
+    {
+      type: "youtube",
+      src: "https://www.youtube.com/embed/FmJhoWHYlx4?playsinline=1",
+      alt: "YouTube Video 2",
+      category: "עוד",
+      description: "",
+    },
+    {
+      type: "youtube",
+      src: "https://www.youtube.com/embed/uIwmZeqrpMk?playsinline=1",
+      alt: "YouTube Video 3",
+      category: "עוד",
+      description: "",
+    },
+    {
+      type: "youtube",
+      src: "https://www.youtube.com/embed/hR53FUOw0AI?playsinline=1",
+      alt: "YouTube Video 4",
+      category: "עוד",
+      description: "",
+    },
     {
       type: "video",
       src: "/sample-video.mp4",
@@ -113,37 +138,7 @@ const GalleryPage = () => {
       category: "עדויות של לקוחות",
       description: "",
     },
-
-    // YouTube items remain in the YouTube section.
-    {
-      type: "youtube",
-      src: "https://www.youtube.com/embed/c0Q0VWiXUAc?playsinline=1",
-      alt: "YouTube Video 1",
-      category: "YouTube",
-      description: "",
-    },
-    {
-      type: "youtube",
-      src: "https://www.youtube.com/embed/FmJhoWHYlx4?playsinline=1",
-      alt: "YouTube Video 2",
-      category: "YouTube",
-      description: "",
-    },
-    {
-      type: "youtube",
-      src: "https://www.youtube.com/embed/uIwmZeqrpMk?playsinline=1",
-      alt: "YouTube Video 3",
-      category: "YouTube",
-      description: "",
-    },
-    {
-      type: "youtube",
-      src: "https://www.youtube.com/embed/hR53FUOw0AI?playsinline=1",
-      alt: "YouTube Video 4",
-      category: "YouTube",
-      description: "",
-    },
-    // Instagram items retain a description.
+    // Instagram items.
     {
       type: "instagram",
       src: "/mair.jpg",
@@ -162,13 +157,12 @@ const GalleryPage = () => {
     },
   ];
 
-  // Define section order.
+  // Define section order without YouTube.
   const sectionOrder = [
     "החזרת אהבה והפרדה",
     "תמונות של אבחון בעופרת",
     "תמונות של ערכות שרפה לביטול כישוף וחסימות קשות",
     "עדויות של לקוחות",
-    "YouTube",
     "Instagram",
     "עוד",
   ];
@@ -193,9 +187,14 @@ const GalleryPage = () => {
       title: "עדויות של לקוחות",
       bannerStyle: neutralBanner,
     },
-    YouTube: { title: "YouTube", bannerStyle: youtubeBanner },
-    Instagram: { title: "Instagram", bannerStyle: instagramBanner },
-    עוד: { title: "עוד", bannerStyle: goldenBanner },
+    Instagram: {
+      title: "Instagram",
+      bannerStyle: instagramBanner,
+    },
+    עוד: {
+      title: "עוד",
+      bannerStyle: goldenBanner,
+    },
   };
 
   // Group items into sections based solely on the item's category.
@@ -257,7 +256,6 @@ const GalleryPage = () => {
             style={{
               maxWidth: "90%",
               height: "80px",
-              // Use the section's gradient and add a subtle repeating pattern overlay.
               backgroundImage: `${
                 section.bannerStyle.background ||
                 "linear-gradient(45deg, #3B82F6, #2563EB, #1D4ED8)"
@@ -268,13 +266,18 @@ const GalleryPage = () => {
           >
             {section.title}
           </div>
-          {/* Masonry Layout for Section Items */}
-          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 bg-white rounded-b-lg p-4 shadow">
+
+          {/* Mobile Layout (kept as is, with fixed aspect ratio for consistency) */}
+          <div className="block lg:hidden columns-1 sm:columns-2 md:columns-3 gap-4 bg-white rounded-b-lg p-4 shadow">
             {section.items.map((item, index) => (
               <div
                 key={index}
                 className="break-inside-avoid mb-4 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 cursor-pointer relative"
-                onClick={() => openModal(item, index)}
+                onClick={
+                  item.type !== "youtube"
+                    ? () => openModal(item, index)
+                    : undefined
+                }
               >
                 {item.type === "youtube" ? (
                   <div className="w-full relative pb-[56.25%] bg-gray-100">
@@ -289,11 +292,11 @@ const GalleryPage = () => {
                     />
                   </div>
                 ) : item.type === "instagram" ? (
-                  <div className="w-full relative group">
+                  <div className="w-full relative pb-[56.25%] bg-gray-100 group">
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className="w-full object-cover"
+                      className="absolute top-0 left-0 w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300">
                       <div className="inline-block p-0.5 rounded-md bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888]">
@@ -309,21 +312,92 @@ const GalleryPage = () => {
                     </div>
                   </div>
                 ) : item.type === "video" ? (
-                  <div className="w-full relative bg-gray-100">
+                  <div className="w-full relative pb-[56.25%] bg-gray-100">
                     <video
                       src={item.src}
                       controls
-                      className="w-full object-cover"
+                      className="absolute top-0 left-0 w-full h-full object-cover"
                     />
                   </div>
                 ) : (
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="w-full object-cover"
-                  />
+                  <div className="w-full relative pb-[56.25%] bg-gray-100">
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="absolute top-0 left-0 w-full h-full object-cover"
+                    />
+                  </div>
                 )}
-                {/* Render description only if it exists */}
+                {item.description && (
+                  <div className="p-2 bg-gray-50">
+                    <p className="text-sm text-gray-700">{item.description}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Layout (redesigned with fixed aspect ratio for all media) */}
+          <div className="hidden lg:grid grid-cols-4 gap-6 bg-white rounded-b-lg p-4 shadow">
+            {section.items.map((item, index) => (
+              <div
+                key={index}
+                className="relative overflow-hidden rounded-lg shadow hover:shadow-xl transform transition-all duration-300 cursor-pointer"
+                onClick={
+                  item.type !== "youtube"
+                    ? () => openModal(item, index)
+                    : undefined
+                }
+              >
+                {item.type === "youtube" ? (
+                  <div className="w-full relative pb-[56.25%] bg-gray-100">
+                    <iframe
+                      src={item.src}
+                      title={item.alt}
+                      className="absolute top-0 left-0 w-full h-full object-cover"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      {...{ playsinline: "true", "webkit-playsinline": "true" }}
+                    />
+                  </div>
+                ) : item.type === "instagram" ? (
+                  <div className="w-full relative pb-[56.25%] bg-gray-100 group">
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="absolute top-0 left-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300">
+                      <div className="inline-block p-1 rounded-md bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888]">
+                        <a
+                          href={item.instagramUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block px-4 py-2 rounded-md bg-transparent text-white transition-colors duration-300"
+                        >
+                          צפה בפוסט
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ) : item.type === "video" ? (
+                  <div className="w-full relative pb-[56.25%] bg-gray-100">
+                    <video
+                      src={item.src}
+                      controls
+                      className="absolute top-0 left-0 w-full h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-full relative pb-[56.25%] bg-gray-100">
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="absolute top-0 left-0 w-full h-full object-cover"
+                    />
+                  </div>
+                )}
                 {item.description && (
                   <div className="p-2 bg-gray-50">
                     <p className="text-sm text-gray-700">{item.description}</p>
@@ -372,11 +446,13 @@ const GalleryPage = () => {
                   />
                 </div>
               ) : modalContent.type === "video" ? (
-                <video
-                  src={modalContent.src}
-                  controls
-                  className="max-w-full max-h-[80vh] rounded-lg object-contain"
-                />
+                <div className="w-full relative pb-[56.25%] bg-gray-100">
+                  <video
+                    src={modalContent.src}
+                    controls
+                    className="absolute top-0 left-0 w-full h-full rounded-lg object-contain"
+                  />
+                </div>
               ) : null}
 
               {modalContent.type === "instagram" &&

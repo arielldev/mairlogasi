@@ -7,6 +7,7 @@ interface Service {
     src: string;
     alt: string;
   };
+  price: string;
 }
 
 const services: Service[] = [
@@ -14,25 +15,31 @@ const services: Service[] = [
     title: "כותרת 1",
     description: "תיאור קצר על השירותים שמאיר עושה - סתם לדוגמה עין הרע",
     image: { src: "/book.jpeg", alt: "Image 1" },
+    price: "100₪",
   },
   {
     title: "כותרת 2",
     description: "תיאור קצר על השירותים שמאיר עושה - סתם לדוגמה עין הרע",
     image: { src: "/eye.jpeg", alt: "Image 2" },
+    price: "120₪",
   },
   {
     title: "כותרת 3",
     description: "תיאור קצר על השירותים שמאיר עושה - סתם לדוגמה עין הרע",
     image: { src: "/ring.jpeg", alt: "Image 3" },
+    price: "150₪",
   },
 ];
 
 const ServicesSection: React.FC = () => {
   return (
     <section className="bg-white text-gray-800" dir="rtl">
-      {/* Removed Section Title for Desktop */}
+      {/* Section Header */}
+      <div className="max-w-7xl mx-auto  px-6">
+        <h1 className="text-4xl font-bold text-center mb-8">השירותים שלנו</h1>
+      </div>
 
-      {/* Mobile Version (Unchanged) */}
+      {/* Mobile Version */}
       <div className="md:hidden">
         <div className="max-w-7xl mx-auto py-8 px-6 space-y-12">
           {services.map((service, index) => (
@@ -45,6 +52,9 @@ const ServicesSection: React.FC = () => {
               <div className="text-center p-4">
                 <h2 className="text-2xl font-semibold">{service.title}</h2>
                 <p className="text-xl text-gray-700">{service.description}</p>
+                <p className="text-sm text-green-500 font-bold mt-2">
+                  {service.price}
+                </p>
               </div>
             </div>
           ))}
@@ -78,6 +88,9 @@ const ServicesSection: React.FC = () => {
                   </h2>
                   <p className="text-xl text-gray-700 leading-relaxed">
                     {service.description}
+                  </p>
+                  <p className="text-sm text-green-500 font-bold mt-2">
+                    {service.price}
                   </p>
                 </div>
               </div>

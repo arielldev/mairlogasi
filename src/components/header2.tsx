@@ -117,18 +117,17 @@ export default function Header() {
                         )}
                       </div>
                       <div className="flex-auto text-right">
-                        <a
-                          href={item.href}
-                          className="block "
-                        >
-                          <span className=" text-gray-900 font">{item.name}</span>
-                      
-                        {item.description && (
-                          <p className="mt-1 text-gray-600">
-                            {item.description}
-                          </p>
-                        )}
-                          </a>
+                        <a href={item.href} className="block ">
+                          <span className=" text-gray-900 font">
+                            {item.name}
+                          </span>
+
+                          {item.description && (
+                            <p className="mt-1 text-gray-600">
+                              {item.description}
+                            </p>
+                          )}
+                        </a>
                       </div>
                     </div>
                   ))}
@@ -217,7 +216,7 @@ export default function Header() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/30" />
+            <div className="fixed inset-0 bg-black/30 w-full" />
           </Transition.Child>
 
           <div className="fixed inset-0 z-50 flex">
