@@ -44,7 +44,7 @@ const HomeYouTubeSection = () => {
   return (
     <section className="my-10 p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        סרטוני יוטיוב מובילים
+        סרטונים
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {displayVideos.map((video, index) => (
