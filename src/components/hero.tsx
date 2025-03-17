@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
     <div
       ref={heroRef}
       // On mobile, fixed height of 400px; on desktop, let height be auto.
-      className="relative overflow-hidden h-[40vh] md:h-auto mt-22 md:mt-0
+      className="relative overflow-hidden h-[35dvh] md:h-auto mt-22 md:mt-0
       "
     >
       <picture className="block h-full">
