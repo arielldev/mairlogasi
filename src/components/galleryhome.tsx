@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 
 // ניתן לייבא את galleryItems ממודול משותף, כאן הם כלולים ישירות לדוגמה.
 const galleryItems = [
