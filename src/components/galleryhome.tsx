@@ -1,8 +1,6 @@
 "use client";
 
-// ניתן לייבא את galleryItems ממודול משותף, כאן הם כלולים ישירות לדוגמה.
 const galleryItems = [
-  // ... פריטים אחרים ...
   {
     type: "youtube",
     src: "https://www.youtube.com/embed/c0Q0VWiXUAc?playsinline=1",
