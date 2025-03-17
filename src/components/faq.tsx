@@ -72,41 +72,56 @@ function FAQItem({ faq, isLast }: FAQItemProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <div className="mb-16">
+    <div className="mb-8">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left focus:outline-none"
+        className="w-full text-left focus:outline-none flex items-center justify-between py-4 px-2 hover:bg-gray-100 transition-colors"
         aria-expanded={isOpen}
         aria-controls={`faq-${faq.question.replace(/\s+/g, "")}`}
       >
-        <h2 className="text-3xl font-bold text-gray-900 mb-4 flex justify-between items-center">
-          <span>{faq.question}</span>
-          <span className="text-2xl">{isOpen ? "–" : "+"}</span>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
+          {faq.question}
         </h2>
+        <svg
+          className={`w-6 h-6 transform transition-transform duration-300 ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
       </button>
       <div
         id={`faq-${faq.question.replace(/\s+/g, "")}`}
         className={`transition-all duration-300 ease-in-out overflow-hidden ${
-          isOpen ? "max-h-screen" : "max-h-0"
+          isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <hr className="border-t border-blue-300 mb-6" />
-        <div className="text-right">
-          <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">
+        <hr className="border-t border-blue-300 mb-4" />
+        <div className="text-right px-2">
+          <p className="text-gray-800 leading-relaxed text-base sm:text-lg whitespace-pre-wrap break-words">
             <span dangerouslySetInnerHTML={{ __html: faq.answer }} />
           </p>
         </div>
       </div>
-      {!isLast && <hr className="border-t border-blue-300 my-10" />}
+      {!isLast && <hr className="border-t border-blue-300 my-6" />}
     </div>
   );
 }
 
 export default function FAQPage() {
   return (
-    <div className="bg-white py-12 mt-22" dir="rtl">
-      <div className="max-w-5xl mx-auto px-6">
-        <h1 className="text-5xl font-bold text-gray-900 text-center mb-12">
+    <div className="bg-white py-12 mt-10" dir="rtl">
+      <div className="max-w-4xl mx-auto px-4">
+        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 text-center mb-8">
           שאלות נפוצות
         </h1>
         {faqData.map((faq, index) => (
