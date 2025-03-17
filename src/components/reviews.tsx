@@ -99,6 +99,11 @@ const reviews: Review[] = [
     description: "הכנעה מול הגרוש עשתה רק טוב",
     messageImage: "/review18.jpg",
   },
+  {
+    id: 18,
+    description: "המלצה מהרב אליהו אבירז'ל ראש אבות בתי הדין הרבניים ירושלים",
+    messageImage: "/gradrecomend4.jpg",
+  },
 ];
 
 const ReviewsSection: React.FC = () => {

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative w-full h-[80dvh] overflow-hidden">
+    <section className="relative w-full h-[70dvh] overflow-hidden">
       {/* Full-screen background image with parallax effect */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed"

@@ -16,8 +16,8 @@ const reviews: Review[] = [
   },
   {
     id: 2,
-    description: "חרדות נעלמו",
-    messageImage: "/review2.jpg",
+    description: "המלצה מהרב אליהו אבירז'ל ראש אבות בתי הדין הרבניים ירושלים",
+    messageImage: "/gradrecomend4.jpg",
   },
   {
     id: 3,

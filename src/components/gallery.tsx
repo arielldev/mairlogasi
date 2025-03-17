@@ -62,6 +62,13 @@ const GalleryPage = () => {
     },
     {
       type: "image",
+      src: "/gradrecomend4.jpg",
+      alt: "תמונה 12",
+      category: "עוד",
+      description: "",
+    },
+    {
+      type: "image",
       src: "/ring.jpeg",
       alt: "תמונה 6",
       category: "עוד",
