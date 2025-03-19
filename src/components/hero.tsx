@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
       className="relative overflow-hidden h-[35dvh] md:h-auto mt-22 md:mt-0
       "
     >
-      <picture className="block h-full">
+      <picture className="block">
         {/* Mobile: use a mobile-specific image */}
         <source media="(max-width: 767px)" srcSet="/mair.jpg" />
         {/* Desktop: use the desktop image */}
