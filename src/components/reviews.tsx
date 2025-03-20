@@ -169,7 +169,7 @@ const ReviewsSection: React.FC = () => {
           onClick={closeModal}
         >
           <div
-            className="relative w-full max-w-[80vw] p-4 bg-white rounded-lg shadow-2xl max-h-[90vh]"
+            className="relative w-full max-w-[80vw] md:max-w-md p-4 bg-white rounded-lg shadow-2xl max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
