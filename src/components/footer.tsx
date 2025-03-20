@@ -45,6 +45,12 @@ const Footer = () => {
       {/* Credits and Copyright */}
       <div className="mt-4 text-center text-sm text-gray-500">
         <p>&copy; {new Date().getFullYear()} מאיר לוגסי. כל הזכויות שמורות.</p>
+        <p className="text-xsm">
+          Made By{" "}
+          <span className="underline">
+            <a href="https://arielelkaslasi.dev">Ariel</a>
+          </span>
+        </p>
       </div>
     </footer>
   );
