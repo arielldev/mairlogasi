@@ -169,7 +169,7 @@ const ReviewsSection: React.FC = () => {
           onClick={closeModal}
         >
           <div
-            className="relative w-full max-w-md p-4 bg-white rounded-lg shadow-2xl"
+            className="relative w-full max-w-[80vw] p-4 bg-white rounded-lg shadow-2xl max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -183,7 +183,7 @@ const ReviewsSection: React.FC = () => {
               <img
                 src={reviews[currentIndex].messageImage}
                 alt={`Review ${reviews[currentIndex].id}`}
-                className="max-w-full max-h-[80vh] rounded-lg object-contain"
+                className="max-w-full max-h-[50vh] rounded-lg object-contain"
               />
               <div className="mt-4 text-center">
                 <p className="text-gray-800 text-lg">

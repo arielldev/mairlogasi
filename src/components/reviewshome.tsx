@@ -86,11 +86,11 @@ const HomeReviewsSection: React.FC = () => {
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 z-50 flex justify-center items-center bg-black/70 backdrop-blur-sm transition duration-300 p-4"
+          className="fixed inset-0 z-50 flex justify-center items-center bg-black/70 backdrop-blur-sm transition duration-300 p-4 "
           onClick={closeModal}
         >
           <div
-            className="relative w-full max-w-md p-4 bg-white rounded-lg shadow-2xl"
+            className="relative w-full max-w-[80vw] p-4 bg-white rounded-lg shadow-2xl max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -104,7 +104,7 @@ const HomeReviewsSection: React.FC = () => {
               <img
                 src={reviews[currentIndex].messageImage}
                 alt={`Review ${reviews[currentIndex].id}`}
-                className="max-w-full max-h-[80vh] rounded-lg object-contain"
+                className="max-w-full max-h-[50vh] rounded-lg object-contain"
               />
               <div className="mt-4 text-center">
                 <p className="text-gray-800 text-lg">
