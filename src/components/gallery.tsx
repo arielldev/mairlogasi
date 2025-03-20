@@ -208,13 +208,7 @@ const GalleryPage = () => {
       category: "ערכות שרפה לביטול כישוף וחסימות קשות",
       description: "הברת כישופים פרצוף של המכשף",
     },
-    {
-      type: "video",
-      src: "/sample-video.mp4",
-      alt: "וידאו MP4",
-      category: "עדויות של לקוחות",
-      description: "",
-    },
+
     // Instagram items.
     {
       type: "instagram",
