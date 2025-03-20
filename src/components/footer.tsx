@@ -1,7 +1,7 @@
 "use client";
 
 import { Facebook, Instagram } from "lucide-react";
-import { FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa"; // Correct TikTok icon import from react-icons/fa
+import { FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
