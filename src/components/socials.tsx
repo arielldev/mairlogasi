@@ -27,7 +27,7 @@ const SocialDropdown: React.FC = () => {
         {isOpen && (
           <div className="absolute left-full top-0 ml-2 w-40 bg-white rounded shadow-lg transition-all duration-300 ease-in-out transform animate-fadeIn">
             <a
-              href="https://www.youtube.com"
+              href="https://www.youtube.com/channel/UCUIx0WuxjqAnAWQzrEbg6fQ"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center px-4 py-2 cursor-pointer transition-transform duration-200 ease-in-out hover:scale-105 hover:bg-gray-100"
@@ -36,7 +36,7 @@ const SocialDropdown: React.FC = () => {
               יוטיוב
             </a>
             <a
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/meirlogasi7/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center px-4 py-2 cursor-pointer transition-transform duration-200 ease-in-out hover:scale-105 hover:bg-gray-100"
@@ -45,7 +45,7 @@ const SocialDropdown: React.FC = () => {
               אינסטגרם
             </a>
             <a
-              href="https://wa.me/"
+              href="https://wa.me/972507608061"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center px-4 py-2 cursor-pointer transition-transform duration-200 ease-in-out hover:scale-105 hover:bg-gray-100"
@@ -54,7 +54,7 @@ const SocialDropdown: React.FC = () => {
               וואטסאפ
             </a>
             <a
-              href="https://www.facebook.com"
+              href="https://www.facebook.com/profile.php?id=100076499254049&sk"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center px-4 py-2 cursor-pointer transition-transform duration-200 ease-in-out hover:scale-105 hover:bg-gray-100"
