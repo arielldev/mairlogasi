@@ -42,7 +42,7 @@ const Hero: React.FC = () => {
         <img
           src="/mairbanner2.jpeg"
           alt="הרב מאיר לוגסי"
-          className="hidden md:block w-full h-auto object-cover"
+          className="hidden md:block w-full h-auto object-contain md:object-cover"
           style={{
             transform: `translateY(${parallax}px)`,
             transition: "transform 0.1s ease-out",
