@@ -21,7 +21,7 @@ const services: Service[] = [
   {
     title: "מזוזה מהודרת",
     description: "הרב סופר סת''ם כותב מזוזות קמעות וספר תורה",
-    image: { src: "/eye.jpeg", alt: "Image 2" },
+    image: { src: "/mezoza.jpg", alt: "Image 2" },
     price: "400₪",
   },
   {
