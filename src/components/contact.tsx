@@ -53,7 +53,6 @@ const ContactUsWithWhatsApp: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white" dir="rtl">
-      {/* Contact Form Section */}
       <div className="md:w-1/2 flex flex-col justify-center items-center p-8">
         <h2 className="text-3xl font-bold mb-4 text-gray-800">צור קשר</h2>
         <p className="mb-6 text-gray-600 text-center">
@@ -133,17 +132,13 @@ const ContactUsWithWhatsApp: React.FC = () => {
           </button>
         </form>
       </div>
-      {/* WhatsApp Section with Conditional Diagonal Divider */}
       <div
         className="md:w-1/2 flex flex-col justify-center items-center p-8 bg-blue-50 relative"
         style={{
-          clipPath: isMobile
-            ? "none"
-            : "none",
+          clipPath: isMobile ? "none" : "none",
         }}
       >
         <div className="mb-4">
-          {/* Replace with your WhatsApp logo */}
           <img
             src="/whatsapp-logo.png"
             alt="WhatsApp Logo"

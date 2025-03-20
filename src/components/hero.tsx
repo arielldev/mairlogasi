@@ -5,11 +5,10 @@ const Hero: React.FC = () => {
   const [parallax, setParallax] = useState(0);
   const [multiplier, setMultiplier] = useState(0.1);
 
-  // Adjust parallax multiplier based on window width.
   useEffect(() => {
     const updateMultiplier = () => {
       if (window.innerWidth < 768) {
-        setMultiplier(0); // Disable parallax on mobile.
+        setMultiplier(0);
       } else {
         setMultiplier(0.1);
       }
@@ -20,7 +19,6 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener("resize", updateMultiplier);
   }, []);
 
-  // Update parallax effect on scroll (desktop only).
   useEffect(() => {
     const handleScroll = () => {
       if (heroRef.current) {
@@ -36,14 +34,11 @@ const Hero: React.FC = () => {
   return (
     <div
       ref={heroRef}
-      // On mobile, fixed height of 400px; on desktop, let height be auto.
       className="relative overflow-hidden h-[35dvh] md:h-auto mt-22 md:mt-0
       "
     >
       <picture className="block">
-        {/* Mobile: use a mobile-specific image */}
         <source media="(max-width: 767px)" srcSet="/mair.jpg" />
-        {/* Desktop: use the desktop image */}
         <img
           src="/mairbanner2.jpeg"
           alt="הרב מאיר לוגסי"
@@ -53,13 +48,12 @@ const Hero: React.FC = () => {
             transition: "transform 0.1s ease-out",
           }}
         />
-        {/* Mobile image visible only on mobile */}
         <img
           src="/mobile-banner.jpeg"
           alt="הרב מאיר לוגסי"
           className="block md:hidden w-auto h-full object-contain mx-auto"
           style={{
-            transform: "translateY(0px)", // No parallax on mobile.
+            transform: "translateY(0px)",
           }}
         />
       </picture>

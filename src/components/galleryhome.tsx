@@ -29,13 +29,10 @@ const galleryItems = [
     category: "עוד",
     description: "",
   },
-  // ... פריטים אחרים ...
 ];
 
 const HomeYouTubeSection = () => {
-  // סינון הפריטים מסוג YouTube
   const youtubeVideos = galleryItems.filter((item) => item.type === "youtube");
-  // בחירת שלושה סרטונים
   const displayVideos = youtubeVideos.slice(0, 3);
 
   return (

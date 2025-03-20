@@ -53,7 +53,6 @@ const ServicesSection: React.FC = () => {
         <h1 className="text-4xl font-bold text-center mb-8">השירותים שלנו</h1>
       </div>
 
-      {/* Mobile Version */}
       <div className="md:hidden">
         <div className="max-w-7xl mx-auto py-8 px-6 space-y-12">
           {services.map((service, index) => (
@@ -75,7 +74,6 @@ const ServicesSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Desktop Full-Width Article-like Version */}
       <div className="hidden md:block">
         {services.map((service, index) => {
           const isOdd = index % 2 !== 0;

@@ -10,7 +10,6 @@ export default function WhatsAppBanner() {
         rel="noopener noreferrer"
       >
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between py-3 px-4 sm:px-6 lg:px-8">
-          {/* Left side in RTL (appears on the right) – includes the contact text and WhatsApp logo */}
           <div className="flex items-center gap-3">
             <span className="font-bold text-lg">צור קשר דרך</span>
             <img
@@ -19,7 +18,6 @@ export default function WhatsAppBanner() {
               className="h-10 w-auto"
             />
           </div>
-          {/* Right side in RTL (appears on the left) – clickable phone number */}
           <span className="bg-white text-blue-700 font-bold px-3 py-1 rounded shadow hover:bg-blue-100 transition-colors mt-2">
             <div className=" sm:mt-0">050-7608061</div>
           </span>

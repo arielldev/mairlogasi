@@ -15,15 +15,12 @@ export default function SingleFaq() {
   return (
     <div className="bg-white py-12" dir="rtl">
       <div className="max-w-3xl mx-auto px-6">
-        {/* Question Header */}
         <div className="mb-10">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
             {faqItem.question}
           </h2>
           <hr className="border-t border-blue-300 mx-auto w-1/2 mb-6" />
-          {/* Answer Section */}
           <div className="flex flex-col sm:flex-row items-center">
-            {/* Image Column */}
             <div className="sm:w-1/3 flex justify-center mb-4 sm:mb-0">
               <img
                 src={faqItem.image}
@@ -31,7 +28,6 @@ export default function SingleFaq() {
                 className="w-32 h-32 object-cover rounded-lg"
               />
             </div>
-            {/* Text Column */}
             <div className="sm:w-2/3 text-right">
               <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">
                 <span
@@ -44,7 +40,6 @@ export default function SingleFaq() {
               </p>
             </div>
           </div>
-          {/* Centered "Read More" Button */}
           <div className="mt-6 text-center">
             <a
               href="/faq"

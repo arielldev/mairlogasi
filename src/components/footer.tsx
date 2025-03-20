@@ -16,7 +16,6 @@ const Footer = () => {
           />
         </div>
 
-        {/* Social Media Links */}
         <div className="flex space-x-6 mb-4 md:mb-0">
           <a
             href="https://www.facebook.com/profile.php?id=100076499254049&sk"
@@ -42,7 +41,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Credits and Copyright */}
       <div className="mt-4 text-center text-sm text-gray-500">
         <p>&copy; {new Date().getFullYear()} מאיר לוגסי. כל הזכויות שמורות.</p>
         <p className="text-xsm">

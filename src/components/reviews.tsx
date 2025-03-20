@@ -163,7 +163,6 @@ const ReviewsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal */}
       {isModalOpen && (
         <div
           className="fixed inset-0 z-50 flex justify-center items-center bg-black/70 backdrop-blur-sm transition duration-300 p-4"

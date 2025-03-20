@@ -15,7 +15,6 @@ const SocialDropdown: React.FC = () => {
   return (
     <div className="fixed left-0 top-1/2 transform -translate-y-1/2 z-50">
       <div className="relative">
-        {/* Button with blue gradient and contact icon */}
         <button
           onClick={toggleDropdown}
           className="cursor-pointer bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-r-lg focus:outline-none shadow-md transform transition duration-300 hover:scale-105 active:scale-95"
@@ -23,7 +22,6 @@ const SocialDropdown: React.FC = () => {
           <FaEnvelope className="inline-block mr-2" />
           צור קשר
         </button>
-        {/* Dropdown menu */}
         {isOpen && (
           <div className="absolute left-full top-0 ml-2 w-40 bg-white rounded shadow-lg transition-all duration-300 ease-in-out transform animate-fadeIn">
             <a

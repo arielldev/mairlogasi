@@ -65,7 +65,6 @@ export default function Header() {
     setCurrentPath(window.location.pathname);
   }, []);
 
-  // Helpers for active styling
   const getLinkClasses = (linkHref: string): string => {
     const base = "flex items-center gap-1 text-sm font-semibold ";
     return (
@@ -80,10 +79,8 @@ export default function Header() {
 
   return (
     <>
-      {/* Desktop Header */}
       <header className="hidden lg:block bg-white shadow-md" dir="ltr">
         <nav className="mx-auto flex max-w-7xl items-center justify-between lg:px-8">
-          {/* Logo */}
           <div>
             <a href="#" className="p-2">
               <img
@@ -93,7 +90,6 @@ export default function Header() {
               />
             </a>
           </div>
-          {/* Navigation */}
           <div className="flex items-center space-x-8">
             <Popover className="relative">
               <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold text-gray-900 cursor-pointer">
@@ -176,7 +172,6 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Mobile Header */}
       <header className="lg:hidden bg-white shadow-md" dir="rtl">
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
           <div className="flex-1 flex justify-start">
@@ -199,14 +194,12 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Mobile Menu Drawer with Transition.Root */}
       <Transition.Root show={mobileMenuOpen} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-50 lg:hidden"
           onClose={setMobileMenuOpen}
         >
-          {/* Overlay */}
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -230,7 +223,6 @@ export default function Header() {
               leaveTo="translate-x-full"
             >
               <Dialog.Panel className="relative ml-auto w-72 bg-white flex flex-col">
-                {/* Drawer Header */}
                 <div className="flex flex-row-reverse items-center justify-between p-4 border-b border-gray-200">
                   <div>
                     <a href="#" className="p-2">
@@ -249,7 +241,6 @@ export default function Header() {
                   </button>
                 </div>
 
-                {/* Navigation Content */}
                 <div className="flex-grow overflow-y-auto p-4" dir="ltr">
                   <div className="flex flex-col space-y-2">
                     <Disclosure>
@@ -317,7 +308,6 @@ export default function Header() {
                   </div>
                 </div>
 
-                {/* Drawer Footer */}
                 <div className="p-4 border-t border-gray-200">
                   <a
                     href="https://wa.me/972507608061"
