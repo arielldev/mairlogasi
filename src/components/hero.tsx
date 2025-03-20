@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
   return (
     <div
       ref={heroRef}
-      className="relative overflow-hidden h-auto mt-22 md:mt-0
+      className="relative overflow-hidden h-[35dvh] md:h-auto mt-22 md:mt-0
       "
     >
       <picture className="block">
@@ -51,7 +51,7 @@ const Hero: React.FC = () => {
         <img
           src="/mobile-banner.jpeg"
           alt="הרב מאיר לוגסי"
-          className="block md:hidden w-auto h-full object-contain mx-auto"
+          className="block md:hidden w-full h-full object-cover mx-auto"
           style={{
             transform: "translateY(0px)",
           }}
